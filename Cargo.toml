@@ -1,0 +1,13 @@
+[package]
+name = "crossroads_cli"
+version = "0.1.0"
+authors = ["Kai Yao <kai.b.yao@gmail.com>"]
+
+[dependencies]
+clap = "~2.32"
+diesel = "~1.3"
+serde = "~1.0"
+toml = "~0.4"
+
+[dev-dependencies]
+pretty_assertions = "~0.5"
