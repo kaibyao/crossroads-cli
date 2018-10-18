@@ -11,3 +11,5 @@ pub fn cmd_run() -> App<'static, 'static> {
                 .short("u"),
         )
 }
+
+// TODO: support env variables as well as config file.

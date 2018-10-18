@@ -2,17 +2,21 @@
 // #[macro_use]
 // extern crate pretty_assertions;
 
+#[macro_use]
+extern crate serde_derive;
+
 extern crate clap;
 
 // extern crate toml;
 // use toml::Value;
 
 mod commands;
-mod constants;
+mod config;
 
 fn main() {
-    let matches = commands::parse_cmd();
-    // let config_file = matches.value_of("config").unwrap_or(constants::DEFAULT_CONFIG_FILE_NAME);
+    commands::parse_cmd();
+
+    // println!("{:?}", matches.subcommand());
 }
 
 // fn parse_cargo_toml() -> Value {}
