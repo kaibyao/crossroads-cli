@@ -32,7 +32,7 @@
           // "--bin=crossroads_cli",
         ]
       },
-      "args": ["new", "."],
+      "args": ["new", "xr_test"],
       "cwd": "${workspaceFolder}",
       "sourceLanguages": [
         "rust"

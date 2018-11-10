@@ -1,8 +1,11 @@
 extern crate toml;
+extern crate crossroads;
 
-use std::fs::{canonicalize, write, DirBuilder};
+use std::fs::{canonicalize, write};
+use std::process::Command;
 use clap::{App, Arg, ArgMatches, SubCommand};
-use config::{Config, CONFIG_FILE_NAME};
+use config::{CONFIG_FILE_NAME};
+use self::crossroads::Config;
 
 /// Generates the Clap config for subcommand `new`.
 pub fn cmd_new() -> App<'static, 'static> {
@@ -26,13 +29,18 @@ pub fn parse_new(matches: &ArgMatches) {
 
 // Wrapper around create_project_folder(path: &str) and create_project_files(path: &str)
 fn create_project(path: &str) {
-    if create_project_folder(path) == () && create_project_files(path) == () {
+    if run_cargo_new(path) == () && create_project_files(path) == () {
         println!("Success: Created project folder at `{}`", path);
     }
 }
 
-fn create_project_folder(path: &str) -> () {
-    DirBuilder::new().recursive(true).create(path).unwrap()
+// Runs `cargo new <path>` to create the project folder + basic Cargo.toml file used by Diesel
+fn run_cargo_new(path: &str) -> () {
+    Command::new("cargo")
+        .arg("new")
+        .arg(path)
+        .output()
+        .unwrap();
 }
 
 fn create_project_files(path: &str) -> () {
