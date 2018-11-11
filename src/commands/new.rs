@@ -1,6 +1,9 @@
 extern crate toml;
 extern crate crossroads;
 
+#[cfg(test)]
+extern crate assert_fs;
+
 use std::fs::{canonicalize, write};
 use std::process::Command;
 use clap::{App, Arg, ArgMatches, SubCommand};
@@ -63,5 +66,28 @@ fn generate_default_config() -> Config {
         db_user: "user".to_string(),
         db_pass: "password".to_string(),
         db_name: "crossroads".to_string(),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn is_project_files_created() {
+        use commands::new::assert_fs::fixture::PathChild;
+
+        let temp = assert_fs::TempDir::new().unwrap();
+        let project_path = temp.path().to_str().unwrap();
+
+        create_project(project_path);
+
+        use std::fs::read_dir;
+        for path in read_dir(&project_path).unwrap() {
+            println!("{}", path.unwrap().path().display());
+        }
+
+        // assert!(temp.child("Cargo.toml").path().exists());
+        assert!(temp.child(CONFIG_FILE_NAME).path().exists());
     }
 }

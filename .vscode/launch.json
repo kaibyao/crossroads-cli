@@ -7,6 +7,27 @@
     {
       "type": "lldb",
       "request": "launch",
+      "name": "cargo test",
+      "cargo": {
+        "args": [
+          "test",
+          "--bin=crossroads_cli",
+        ]
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "RUST_BACKTRACE": "1"
+      },
+      "sourceLanguages": [
+        "rust"
+      ],
+      "terminal": "integrated"
+    },
+
+    {
+      "type": "lldb",
+      "request": "launch",
       "name": "subcommand: none",
       "cargo": {
         "args": [

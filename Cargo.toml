@@ -12,4 +12,9 @@ toml = "~0.4"
 crossroads = { path = "../crossroads" }
 
 [dev-dependencies]
+assert_fs = "~0.10"
 pretty_assertions = "~0.5"
+
+# The development profile, used for `cargo build`
+[profile.dev]
+codegen-units = 4
