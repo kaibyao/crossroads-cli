@@ -82,12 +82,6 @@ mod tests {
 
         create_project(project_path);
 
-        use std::fs::read_dir;
-        for path in read_dir(&project_path).unwrap() {
-            println!("{}", path.unwrap().path().display());
-        }
-
-        // assert!(temp.child("Cargo.toml").path().exists());
         assert!(temp.child(CONFIG_FILE_NAME).path().exists());
     }
 }
